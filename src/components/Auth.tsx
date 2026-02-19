@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import {
   GraduationCap,
@@ -8,7 +8,6 @@ import {
   motion,
   useMotionValue,
   useSpring,
-  AnimatePresence,
   LayoutGroup,
 } from 'framer-motion';
 
@@ -67,8 +66,6 @@ export default function Auth() {
         if (error) throw error;
       } else {
         if (!fullName.trim()) throw new Error('Full name required');
-
-        // 🔥 IMPORTANT: Pass fullName properly to signUp
         const { error } = await signUp(email, password, fullName.trim());
         if (error) throw error;
       }
@@ -196,6 +193,30 @@ export default function Auth() {
               </motion.button>
 
             </form>
+
+            {/* 🔥 Styled Demo Credentials */}
+            <div className="mt-8 p-4 rounded-2xl bg-slate-800/60 border border-slate-700 backdrop-blur-md">
+              <p className="text-xs uppercase tracking-widest text-slate-400 mb-3">
+                Demo Login Credentials
+              </p>
+
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between items-center bg-slate-900/60 px-3 py-2 rounded-lg border border-slate-700">
+                  <span className="text-slate-400">Email</span>
+                  <span className="text-indigo-400 font-mono">
+                    xyz@example.com
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center bg-slate-900/60 px-3 py-2 rounded-lg border border-slate-700">
+                  <span className="text-slate-400">Password</span>
+                  <span className="text-indigo-400 font-mono">
+                    123456
+                  </span>
+                </div>
+              </div>
+            </div>
+
           </motion.div>
         </div>
       </div>
