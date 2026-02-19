@@ -7,6 +7,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables');
 }
 
+// 🔥 IMPORTANT: Named export (not default export)
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export type Profile = {
