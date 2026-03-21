@@ -53,7 +53,7 @@ export default function Dashboard() {
   const [neon, setNeon] = useState(false);
 
   // 🔥 get profile from context
-  const { signOut } = useAuth();
+  const { signOut, profile } = useAuth();
 
   /* ---------------- Greeting Logic ---------------- */
   const greeting = useMemo(() => {
