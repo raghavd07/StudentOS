@@ -55,26 +55,32 @@ export default function Auth() {
       : 'from-emerald-500 to-emerald-600';
 
   /* ---------------- Submit ---------------- */
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
+/* ---------------- Submit ---------------- */
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    try {
-      if (isLogin) {
-        const { error } = await signIn(email, password);
-        if (error) throw error;
-      } else {
-        if (!fullName.trim()) throw new Error('Full name required');
-        const { error } = await signUp(email, password, fullName.trim());
-        if (error) throw error;
-      }
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Error');
-    } finally {
-      setLoading(false);
+  // 🚫 Prevent multiple requests
+  if (loading) return;
+
+  setError('');
+  setLoading(true);
+
+  try {
+    if (isLogin) {
+      const { error } = await signIn(email, password);
+      if (error) throw error;
+    } else {
+      if (!fullName.trim()) throw new Error('Full name required');
+
+      const { error } = await signUp(email, password, fullName.trim());
+      if (error) throw error;
     }
-  };
+  } catch (err: unknown) {
+    setError(err instanceof Error ? err.message : 'Error');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <LayoutGroup>

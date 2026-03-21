@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   /* ---------------- SIGN UP ---------------- */
   const signUp = async (email: string, password: string, fullName: string) => {
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
